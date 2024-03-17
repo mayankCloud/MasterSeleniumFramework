@@ -1,0 +1,8 @@
+{
+  "firstName": "demo",
+  "lastName": "user",
+  "addressLine": "Lane 1",
+  "townOrCity": "San Francisco",
+  "zipCode": "73001",
+  "email": "user@testc.com"
+}
