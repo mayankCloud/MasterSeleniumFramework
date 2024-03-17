@@ -1,7 +1,9 @@
-package org.selenium;
+package org.selenium.tests;
 
 import org.selenium.pom.base.BaseTest;
 import org.selenium.pom.objects.BillingAddress;
+import org.selenium.pom.objects.Product;
+import org.selenium.pom.objects.User;
 import org.selenium.pom.pages.*;
 import org.selenium.pom.utils.JacksonUtils;
 import org.testng.Assert;
@@ -37,18 +39,42 @@ public class CheckoutPageTest extends BaseTest {
 
     @Test
     public void guestCheckoutUsingPOJO() throws InterruptedException, IOException {
-        BillingAddress billingAddress = JacksonUtils.deSerializeBillingAddress("myBillingAddress.json", BillingAddress.class);
+        BillingAddress billingAddress = JacksonUtils.deSerializeJSON("myBillingAddress.json", BillingAddress.class);
+        Product product = new Product(1215);
         HomePage homePage = new HomePage(driver).load();
         Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
         StorePage storePage = homePage.clickStoreMenuLink();
         CartPage cartPage = storePage
-                .search("blue")
+                .search(product.getName())
                 .clickOnAddToCart()
                 .viewCart();
-        Assert.assertEquals(cartPage.getProductName(), "Blue Shoes");
+        Assert.assertEquals(cartPage.getProductName(), product.getName());
         CheckoutPage checkoutPage = cartPage.clickOnCheckoutButton();
         checkoutPage.setBillingAddress(billingAddress);
         OrderConfirmatioPage orderConfirmatioPage = checkoutPage.clickOnPlaceOrderButton();
         Assert.assertEquals(orderConfirmatioPage.getOrderConfirmationMessage(), "Thank you. Your order has been received.");
+    }
+
+    @Test
+    public void loginUserGuestCheckout() throws IOException {
+        Product product = new Product(1196);
+        BillingAddress billingAddress = JacksonUtils.deSerializeJSON("myBillingAddress.json", BillingAddress.class);
+        User user = new User("testuser");
+
+
+        CartPage cartPage = new HomePage(driver)
+                .load()
+                .navigateToAccountPage()
+                .login(user.getUsername(), user.getPassword())
+                .clickStoreMenuLink()
+                .search(product.getName())
+                .clickOnAddToCart()
+                .viewCart();
+        Assert.assertEquals("Blue Tshirt", product.getName());
+        CheckoutPage checkoutPage = cartPage.clickOnCheckoutButton();
+        checkoutPage.setBillingAddress(billingAddress);
+        OrderConfirmatioPage orderConfirmatioPage = checkoutPage.clickOnPlaceOrderButton();
+        Assert.assertEquals(orderConfirmatioPage.getOrderConfirmationMessage(), "Thank you. Your order has been received.");
+
     }
 }
