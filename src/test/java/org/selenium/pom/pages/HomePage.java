@@ -6,7 +6,7 @@ import org.selenium.pom.base.BasePage;
 
 public class HomePage extends BasePage {
     private final By storeMenuLink = By.cssSelector("li[id='menu-item-1227'] a[class='menu-link']");
-
+    private final By accountNavbarLink = By.xpath("//li[@id='menu-item-1237']/a[text()='Account']");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -18,6 +18,10 @@ public class HomePage extends BasePage {
     public HomePage load(){
         loadURL("/");
         return this;
+    }
+    public AccountPage navigateToAccountPage(){
+        driver.findElement(accountNavbarLink).click();
+        return new AccountPage(driver);
     }
 }
 
