@@ -29,7 +29,7 @@ public class StorePage extends BasePage {
     private StorePage enterTextInSearchField(String searchItem) {
         driver.findElement(searchField).click();
         driver.findElement(searchField).clear();
-        driver.findElement(searchField).sendKeys("blue");
+        driver.findElement(searchField).sendKeys(searchItem);
         return this;
     }
 
@@ -54,10 +54,11 @@ public class StorePage extends BasePage {
     }
 
     public CartPage viewCart() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(viewYourShoppingCart));
-        actions.moveToElement(driver.findElement(viewYourShoppingCart)).build().perform();
-        wait.until(ExpectedConditions.elementToBeClickable(viewYourShoppingCart))
-                .click();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(viewYourShoppingCart));
+//        actions.moveToElement(driver.findElement(viewYourShoppingCart)).build().perform();
+//        wait.until(ExpectedConditions.elementToBeClickable(viewYourShoppingCart))
+//                .click();
+        driver.findElement(By.cssSelector("#ast-desktop-header .ast-cart-menu-wrap")).click();
         return new CartPage(driver);
     }
 }
