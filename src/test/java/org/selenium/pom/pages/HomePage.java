@@ -15,6 +15,10 @@ public class HomePage extends BasePage {
         driver.findElement(storeMenuLink).click();
         return new StorePage(driver);
     }
+    public HomePage load(){
+        loadURL("/");
+        return this;
+    }
 }
 
 
