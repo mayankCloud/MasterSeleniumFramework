@@ -27,10 +27,14 @@ public class CheckoutPage extends BasePage {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     public CheckoutPage enterFirstName(String firstName){
+        driver.findElement(emailTextField).click();
+        driver.findElement(emailTextField).clear();
         driver.findElement(firstNameTextField).sendKeys(firstName);
         return this;
     }
     public CheckoutPage enterLastName(String lastName){
+        driver.findElement(emailTextField).click();
+        driver.findElement(emailTextField).clear();
         driver.findElement(lastNameTextField).sendKeys(lastName);
         return this;
     }
@@ -41,10 +45,14 @@ public class CheckoutPage extends BasePage {
         return this;
     }
     public CheckoutPage enterStreetAddress(String addressLine1) {
+        driver.findElement(emailTextField).click();
+        driver.findElement(emailTextField).clear();
         driver.findElement(streetAddressTextField).sendKeys(addressLine1);
         return this;
     }
     public CheckoutPage enterTownOrCity(String townOrCityName){
+        driver.findElement(emailTextField).click();
+        driver.findElement(emailTextField).clear();
         driver.findElement(cityTextField).sendKeys(townOrCityName);
         return this;
     }
@@ -55,6 +63,8 @@ public class CheckoutPage extends BasePage {
         return this;
     }
     public CheckoutPage enterZipCode(String zipCode){
+        driver.findElement(emailTextField).click();
+        driver.findElement(emailTextField).clear();
         driver.findElement(zipCodeTextField).sendKeys(zipCode);
         return this;
     }
@@ -64,6 +74,8 @@ public class CheckoutPage extends BasePage {
         return new OrderConfirmatioPage(driver);
     }
     public CheckoutPage enterEmail(String email){
+        driver.findElement(emailTextField).click();
+        driver.findElement(emailTextField).clear();
         driver.findElement(emailTextField).sendKeys(email);
         return this;
     }
