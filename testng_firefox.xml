@@ -10,10 +10,4 @@
             <class name="org.selenium.pom.tests.CheckoutPageTest"></class>
         </classes>
     </test>
-    <test name="CHROME">
-        <parameter name="browser" value="CHROME"></parameter>
-        <classes>
-            <class name="org.selenium.pom.tests.CheckoutPageTest"></class>
-        </classes>
-    </test>
 </suite>
