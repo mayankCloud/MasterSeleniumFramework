@@ -23,8 +23,8 @@ public class CheckoutPageTest extends BaseTest {
                 .setZipCode("73001")
                 .setEmail("user@test.com");
 
-        HomePage homePage = new HomePage(driver).load();
-        Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
+        HomePage homePage = new HomePage(getDriver()).load();
+        Assert.assertEquals(getDriver().getTitle(), "AskOmDch – Become a Selenium automation expert!");
         StorePage storePage = homePage.clickStoreMenuLink();
         CartPage cartPage = storePage
                 .search("blue")
@@ -41,8 +41,8 @@ public class CheckoutPageTest extends BaseTest {
     public void guestCheckoutUsingPOJO() throws InterruptedException, IOException {
         BillingAddress billingAddress = JacksonUtils.deSerializeJSON("myBillingAddress.json", BillingAddress.class);
         Product product = new Product(1215);
-        HomePage homePage = new HomePage(driver).load();
-        Assert.assertEquals(driver.getTitle(), "AskOmDch – Become a Selenium automation expert!");
+        HomePage homePage = new HomePage(getDriver()).load();
+        Assert.assertEquals(getDriver().getTitle(), "AskOmDch – Become a Selenium automation expert!");
         StorePage storePage = homePage.clickStoreMenuLink();
         CartPage cartPage = storePage
                 .search(product.getName())
@@ -62,7 +62,7 @@ public class CheckoutPageTest extends BaseTest {
         User user = new User("testuser");
 
 
-        CartPage cartPage = new HomePage(driver)
+        CartPage cartPage = new HomePage(getDriver())
                 .load()
                 .navigateToAccountPage()
                 .login(user.getUsername(), user.getPassword())
